@@ -1,7 +1,10 @@
 # Set the image
-FROM vm/ubuntu:20.04
+FROM ubuntu:20.04
 
 MEMORY 2G
+
+# Install curl and sudo
+RUN apt-get update && apt-get install -y curl sudo
 
 # Install Node.js 18.x
 RUN curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
