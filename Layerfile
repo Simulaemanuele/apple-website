@@ -1,5 +1,5 @@
 # Set the image
-FROM vm/ubuntu:18.04
+FROM vm/ubuntu:20.04
 
 MEMORY 2G
 
