@@ -1,7 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { footerLinks } from "../constants";
+import useWindowDimensions from "../hooks/useWindowDimensions";
 
 const Footer = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  const windowDimensions = useWindowDimensions();
+
+  console.log("windowDimension: ", windowDimensions);
+
+  const handleResize = () => {
+    if (windowDimensions.width <= 760) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+    console.log("isMobile: ", isMobile);
+  };
+
+  useEffect(() => {
+    handleResize();
+  }, [windowDimensions]);
+
   return (
     <footer className="py-5 sm:px-10 px-5">
       <div className="screen-max-width">
@@ -23,10 +43,15 @@ const Footer = () => {
           </p>
           <div className="flex">
             {footerLinks.map((link, i) => (
-              <p key={link + i} className="font-semibold text-gray text-xs">
+              <p
+                key={link + i}
+                className={`font-semibold text-gray text-xs ${
+                  isMobile && "mr-2 mt-3"
+                }`}
+              >
                 {link}{" "}
                 {i !== footerLinks.length - 1 && (
-                  <span className="mx-2"> | </span>
+                  <>{isMobile === false && <span className="mx-2"> | </span>}</>
                 )}
               </p>
             ))}
